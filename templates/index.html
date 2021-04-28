@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Task Master</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Task Master</h1>
+    <form action="/" method="POST">
+        <input type="text" name="content" id="content" style="width: 300px;">&nbsp;
+        <input type="submit" value="Add Task" class="btn btn-primary">&nbsp;
+        <input type="button" value="Update Task" id="updateTask" class="btn btn-primary">
+        <input type="hidden" id="taskId" name="taskId" />
+    </form>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{task.id}}</td>
+            <td>{{task.content}}</td>
+            <td>{{task.date_created.date()}}</td>
+            <td>
+                <a href="/delete/{{task.id}}" class="btn btn-danger">Delete</a>
+                <a class="btn btn-warning" id="edit" onclick="edit_task('{{task.id}}');">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</div>
+{% endblock %}
